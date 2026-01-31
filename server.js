@@ -15,7 +15,6 @@ let ultimoQR = "";
 let estaListo = false;
 
  
-
 const client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: {
@@ -27,6 +26,7 @@ const client = new Client({
         ]
     }
 });
+
 
 
 // --- EVENTOS DEL CLIENTE ---
