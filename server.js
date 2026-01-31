@@ -18,10 +18,10 @@ let estaListo = false;
 
 const client = new Client({
     authStrategy: new LocalAuth(),
-    /*puppeteer: {
+    puppeteer: {
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox']
-    }*/
+    } 
 });
 
 // --- EVENTOS DEL CLIENTE ---

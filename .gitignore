@@ -11,6 +11,8 @@
 temp/
 node_modules/
 build/
+*.wwebjs_auth/
+*.wwebjs_cache/
 
 # Ignore files at any level of directory depth using double asterisk
 **/cache.db
