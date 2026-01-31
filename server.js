@@ -20,9 +20,11 @@ const client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: {
         headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
-    } 
-});
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || null, // Si usas un buildpack de Chrome
+
+    }  
+}); 
 
 // --- EVENTOS DEL CLIENTE ---
 
@@ -96,7 +98,7 @@ app.post('/enviar-mensaje', async (req, res) => {
 
 client.initialize();
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Servidor Node.js corriendo en ${PORT}`);
 });
