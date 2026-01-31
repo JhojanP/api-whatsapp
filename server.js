@@ -9,22 +9,30 @@ const app = express();
 app.use(cors()); 
 app.use(bodyParser.json({ limit: '50mb' }));
 
-
- 
-
+  
 // Variables de estado globales
 let ultimoQR = "";
 let estaListo = false;
 
+ 
+
 const client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: {
-        headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || null, // Si usas un buildpack de Chrome
-
-    }  
-}); 
+        // Estas flags son CRÍTICAS para que funcione en Render
+        args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-accelerated-2d-canvas',
+            '--no-first-run',
+            '--no-zygote',
+            '--disable-gpu'
+        ],
+        // Esto le dice a Puppeteer que use el Chrome que instalamos en el paso 2
+        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/google-chrome-stable', 
+    }
+});
 
 // --- EVENTOS DEL CLIENTE ---
 
