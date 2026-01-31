@@ -1,4 +1,7 @@
- const { Client, LocalAuth, MessageMedia } = require('whatsapp-web.js');
+const chromium = require('@sparticuz/chromium');
+const { Client, LocalAuth, MessageMedia } = require('whatsapp-web.js');
+ 
+
 const express = require('express');
 const cors = require('cors'); // <--- 1. Agregar esta línea
 const qrcodeTerminal = require('qrcode-terminal'); // Para seguir viéndolo en consola
@@ -14,7 +17,7 @@ app.use(bodyParser.json({ limit: '50mb' }));
 let ultimoQR = "";
 let estaListo = false;
 
- 
+ /*
 const client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: {
@@ -24,6 +27,15 @@ const client = new Client({
             '--disable-setuid-sandbox',
             '--disable-dev-shm-usage'
         ]
+    }
+});*/
+
+const client = new Client({
+    authStrategy: new LocalAuth(),
+    puppeteer: {
+        executablePath: await chromium.executablePath(),
+        headless: chromium.headless,
+        args: chromium.args
     }
 });
 
