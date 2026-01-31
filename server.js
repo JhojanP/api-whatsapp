@@ -96,7 +96,7 @@ app.post('/enviar-mensaje', async (req, res) => {
 
 client.initialize();
 
-const PORT = 3000;
+const PORT = 3000 || process.env.PORT;
 app.listen(PORT, () => {
     console.log(`Servidor Node.js corriendo en http://localhost:${PORT}`);
 });
